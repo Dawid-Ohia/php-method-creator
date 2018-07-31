@@ -2,7 +2,6 @@ const vscode = require('vscode');
 
 module.exports = class CreateMethod {
     async create() {
-        
         const editor = this.activeEditor();
 
         if (editor === undefined) {
@@ -27,24 +26,30 @@ module.exports = class CreateMethod {
 
         let methodName = currentLine.match(/this->(.+)\(/)[1];
 
-        let snippet = '';
+        let newMethod = '';
 
         for (let line = doc.lineCount - 1; line >= 0; line--) {
             let textLine = doc.lineAt(line).text.trim();
 
             if (/\}/.test(textLine)) {
-                snippet = `\n\tpublic function ${methodName}()\n`
+                newMethod = `\n\tpublic function ${methodName}()\n`
                             + '\t{\n'
                             + '\t}\n';
 
-                this.activeEditor().insertSnippet(
-                    new vscode.SnippetString(snippet),
-                    this.range(line)
-                );
+                this.activeEditor().edit(edit => {
+                    edit.insert(new vscode.Position(line, 0), newMethod);
+                });
 
                 break;
             }
         }
+
+        // currentPosition = this.activeEditor().selection.active;
+        // console.log(currentPosition);
+
+        // var newSelection = new vscode.Selection(currentPosition, currentPosition);
+        // this.activeEditor().selection = newSelection;
+
     }
     
     range(line) {
@@ -58,5 +63,4 @@ module.exports = class CreateMethod {
     activeDocument() {
         return this.activeEditor().document;
     }
-
 }
