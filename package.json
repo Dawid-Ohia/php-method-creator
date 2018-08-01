@@ -2,7 +2,7 @@
     "name": "php-create-method",
     "displayName": "PHP Create Method",
     "description": "",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "pkboom",
     "engines": {
         "vscode": "^1.25.0"

@@ -32,7 +32,7 @@ module.exports = class CreateMethod {
             let textLine = doc.lineAt(line).text.trim();
 
             if (/\}/.test(textLine)) {
-                newMethod = `\n\tpublic function ${methodName}()\n`
+                newMethod = `\n\tprotected function ${methodName}()\n`
                             + '\t{\n'
                             + '\t}\n';
 
