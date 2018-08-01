@@ -24,7 +24,9 @@ module.exports = class CreateMethod {
 
         let currentLine = doc.lineAt(currentPosition.line).text.trim();
 
-        let methodName = currentLine.match(/this->(.+)\(/)[1];
+        let methodName = currentLine.match(/->([\w-]+)\(/)[1];
+        console.log(methodName);
+        
 
         let newMethod = '';
 
